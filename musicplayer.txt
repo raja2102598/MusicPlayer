@@ -1,0 +1,193 @@
+mysql> create database MusicPlayer;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use musicplayer;
+Database changed
+mysql> create table MusicFiles(Song_ID int(10) AutoIncrement Primary Key,Song_Title varchar(50),Artist_Name varchar(50),Album_Name varchar(50),Song_Location varchar(50),Description varchar(250));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AutoIncrement Primary Key,Song_Title varchar(50),Artist_Name varchar(50),Album_N' at line 1
+mysql> create table MusicFiles(Song_ID int(10) Auto_Increment Primary Key,Song_Title varchar(50),Artist_Name varchar(50),Album_Name varchar(50),Song_Location varchar(50),Description varchar(250));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc musicfiles;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| Song_ID       | int(10)      | NO   | PRI | NULL    | auto_increment |
+| Song_Title    | varchar(50)  | YES  |     | NULL    |                |
+| Artist_Name   | varchar(50)  | YES  |     | NULL    |                |
+| Album_Name    | varchar(50)  | YES  |     | NULL    |                |
+| Song_Location | varchar(50)  | YES  |     | NULL    |                |
+| Description   | varchar(250) | YES  |     | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from  musicplayer;
+ERROR 1146 (42S02): Table 'musicplayer.musicplayer' doesn't exist
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | USA           | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | KOREAN        | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | KOREAN        | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | USA           | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | USA           | 2018,15 songs,3min 32 sec.                         |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------+----------------------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into musicfiles values(6,"Fade","A","World","US","Test album");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from  musicplayer;
+ERROR 1146 (42S02): Table 'musicplayer.musicplayer' doesn't exist
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | USA           | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | KOREAN        | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | KOREAN        | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | USA           | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | USA           | 2018,15 songs,3min 32 sec.                         |
+|       6 | Fade                | A                                      | World                                          | US            | Test album                                         |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------+----------------------------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+-------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location     | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+-------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | USA               | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | KOREAN            | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | KOREAN            | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | USA               | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | USA               | 2018,15 songs,3min 32 sec.                         |
+|       6 | Fade                | A                                      | World                                          | US                | Test album                                         |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3 | 2021,Single,3min 50sec                             |
++---------+---------------------+----------------------------------------+------------------------------------------------+-------------------+----------------------------------------------------+
+7 rows in set (0.00 sec)
+
+mysql> update musicfiles set Song_Location="D:\\Music\Runaway.mp3" where Song_ID=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update musicfiles set Song_Location="D:\\Music\Never.mp3" where Song_ID=2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update musicfiles set Song_Location="D:\\Music\Gone.mp3" where Song_ID=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update musicfiles set Song_Location="D:\\Music\Ignite.mp3" where Song_ID=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update musicfiles set Song_Location="D:\\Music\Faded.mp3" where Song_ID=5;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update musicfiles set Song_Location="D:\\Music\Fade.mp3" where Song_ID=6;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from  musicplayer;
+ERROR 1146 (42S02): Table 'musicplayer.musicplayer' doesn't exist
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location       | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | D:\MusicRunaway.mp3 | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | D:\MusicNever.mp3   | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | D:\MusicGone.mp3    | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | D:\MusicIgnite.mp3  | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | D:\MusicFaded.mp3   | 2018,15 songs,3min 32 sec.                         |
+|       6 | Fade                | A                                      | World                                          | D:\MusicFade.mp3    | Test album                                         |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3   | 2021,Single,3min 50sec                             |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------+----------------------------------------------------+
+7 rows in set (0.00 sec)
+
+mysql> update musicfiles set Song_Location="D:\\Music\Fade.mp3" Artist_Name=Alan where Song_ID=6;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Artist_Name=Alan where Song_ID=6' at line 1
+mysql> update musicfiles set Song_Location="D:\\Music\Fade.mp3",Artist_Name=Alan where Song_ID=6;
+ERROR 1054 (42S22): Unknown column 'Alan' in 'field list'
+mysql> update musicfiles set Song_Location="D:\\Music\Fade.mp3",Artist_Name="Alan" where Song_ID=6;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update musicfiles set Song_Location="D:\\Music\Fade.mp3",Artist_Name="Alan" where Song_ID=6;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location       | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | D:\MusicRunaway.mp3 | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | D:\MusicNever.mp3   | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | D:\MusicGone.mp3    | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | D:\MusicIgnite.mp3  | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | D:\MusicFaded.mp3   | 2018,15 songs,3min 32 sec.                         |
+|       6 | On The Ground       | Alan                                   | R                                              | D:\MusicFade.mp3    | 2021,3min 37sec                                    |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3   | 2021,Single,3min 50sec                             |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------+----------------------------------------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location             | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | D:\MusicRunaway.mp3       | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | D:\MusicNever.mp3         | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | D:\MusicGone.mp3          | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | D:\MusicIgnite.mp3        | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | D:\MusicFaded.mp3         | 2018,15 songs,3min 32 sec.                         |
+|       6 | On The Ground       | Rose                                   | R                                              | D:\\Music\Ontheground.mp3 | 2021,3min 37sec                                    |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3         | 2021,Single,3min 50sec                             |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location             | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | D:\MusicRunaway.mp3       | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | D:\MusicNever.mp3         | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | D:\MusicGone.mp3          | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | D:\MusicIgnite.mp3        | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | D:\MusicFaded.mp3         | 2018,15 songs,3min 32 sec.                         |
+|       6 | On The Ground       | Rose                                   | R                                              | D:\\Music\Ontheground.mp3 | 2021,3min 37sec                                    |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3         | 2021,Single,3min 50sec                             |
+|       8 | A                   | a                                      | a                                              | a                         | aa                                                 |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location             | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | D:\MusicRunaway.mp3       | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | D:\MusicNever.mp3         | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | D:\MusicGone.mp3          | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | D:\MusicIgnite.mp3        | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | D:\MusicFaded.mp3         | 2018,15 songs,3min 32 sec.                         |
+|       6 | On The Ground       | Rose                                   | R                                              | D:\\Music\Ontheground.mp3 | 2021,3min 37sec                                    |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3         | 2021,Single,3min 50sec                             |
+|       8 | A                   | a                                      | a                                              | a                         | aa                                                 |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from  musicfiles;
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+| Song_ID | Song_Title          | Artist_Name                            | Album_Name                                     | Song_Location             | Description                                        |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+|       1 | Runaway             | AURORA                                 | All My Demons Greeting Me As A Friend (Deluxe) | D:\MusicRunaway.mp3       | Released in 2016.Album has 16 other songs.         |
+|       2 | You Will Never Know | Black Pink                             | THE ALBUM                                      | D:\MusicNever.mp3         | Released in 2020 with 7 other songs in this album. |
+|       3 | Gone                | ROSÉ                                   | R                                              | D:\MusicGone.mp3          | Released in2021.2  Songs.                          |
+|       4 | Ignite              | Alan Walker,Julie Bergan,K-391,Senguri | Iginite                                        | D:\MusicIgnite.mp3        | 2018,1 song,3 min 30sec                            |
+|       5 | Faded               | Alan Walker                            | Different World                                | D:\MusicFaded.mp3         | 2018,15 songs,3min 32 sec.                         |
+|       6 | On The Ground       | Rose                                   | R                                              | D:\\Music\Ontheground.mp3 | 2021,3min 37sec                                    |
+|       7 | Saranga Dariya      | Pawan Ch                               | Love Story                                     | D:\\Music\Sar.mp3         | 2021,Single,3min 50sec                             |
++---------+---------------------+----------------------------------------+------------------------------------------------+---------------------------+----------------------------------------------------+
+7 rows in set (0.00 sec)
+
